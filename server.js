@@ -1,4 +1,4 @@
-// require('dotenv').config()
+require('dotenv').config()
 const express = require('express')
 require('./config/db.js')
 require('./model/indexes.js')
@@ -17,12 +17,15 @@ return jwt.sign(username, process.env.TOKEN_SECRET);
   }
   const bodyparser = require('body-parser')
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://localhost:8081',
   optionsSuccessStatus: 200 
 }
 const port = 8000
 app.use(bodyparser.urlencoded({extended:false}))
-app.use(cors(corsOptions))
+app.use(cors({
+  origin: 'https://192.168.144.197:8081',
+  methods: ['GET', 'POST', 'PUT']
+}));
 app.use(express.json())
 // generateAccessToken('harry')
 // app.post('/',(req,res)=>{
